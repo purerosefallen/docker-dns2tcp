@@ -1,0 +1,20 @@
+version: '2.4'
+services:
+        dns2tcp:
+                restart: always
+                image: nanahira/dns2tcp
+                ports:
+                        - 53:53/udp
+                volumes:
+                        - ./dns2tcpd.conf:/dns2tcpd.conf:ro
+
+        shadowsocksr:
+                restart: always
+                image: breakwa11/shadowsocksr
+                environment:
+                        SERVER_ADDR: 0.0.0.0
+                        SERVER_PORT: 8000
+                        PASSWORD: 11111111111
+                        METHOD: aes-256-cfb
+                        PROTOCOL: origin
+                        OBFS: plain
